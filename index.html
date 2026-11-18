@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ESTILIZAÇÃO CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/response.css">
+    <link rel="stylesheet" href="/assets/css/carroselVideo.css">
+    <link rel="stylesheet" href="/assets/css/carroselFerramentas.css">
+    <title>Omuri</title>
+</head>
+
+<body>
+      <!-- TOPO: fica FORA do <main>. No CSS do topo use position: fixed
+       (ex.: header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }) -->
+  <div data-incluir="secoes/topo.html"></div>
+
+  <!-- CONTEÚDO: tudo que estiver aqui rola com inércia e recebe os efeitos.
+       Os <div data-incluir> são substituídos pelo conteúdo dos arquivos. -->
+  <main data-rolagem>
+    <div data-incluir="secoes/carroselFerramentas.html"></div>
+    <div data-incluir="secoes/carroselVideo.html"></div>
+    <div data-incluir="secoes/contato.html"></div>
+  </main>
+
+    <script src="/assets/js/global.js"></script>
+    <script src="/assets/js/carroselVideo.js"></script>
+    <script src="/assets/js/carroselFerramentas.js"></script>
+
+</body>
+
+</html>

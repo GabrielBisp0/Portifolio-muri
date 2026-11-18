@@ -1,0 +1,194 @@
+/* =========================================================
+   Carrossel 3D curvo — todas as classes começam com "c3d"
+   para não conflitar com o CSS do seu site.
+   ========================================================= */
+
+.c3d {
+  --c3d-card: #0d0d0d;
+  --c3d-line: rgba(255, 255, 255, 0.07);
+  --c3d-text: #f2efe9;
+  --c3d-muted: rgba(255, 255, 255, 0.28);
+  --c3d-accent: #f2441d;
+  --c3d-card-w: clamp(150px, 17vw, 250px);   /* largura de cada card */
+  --c3d-perspective: 1400px;                  /* menor = efeito 3D mais forte */
+
+  position: relative;
+  overflow: hidden;
+  padding: clamp(40px, 7vw, 88px) 0 clamp(32px, 5vw, 64px);
+  background: transparent;   /* usa o fundo do seu site */
+  color: var(--c3d-text);
+  isolation: isolate;
+}
+
+/* grade de pontos suave no centro */
+.c3d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1.4px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(ellipse 38% 45% at 50% 62%, #000, transparent);
+          mask-image: radial-gradient(ellipse 38% 45% at 50% 62%, #000, transparent);
+  pointer-events: none;
+}
+
+.c3d__title {
+  margin: 0 auto clamp(28px, 5vw, 64px);
+  padding: 0 20px;
+  max-width: 24ch;
+  text-align: center;
+  font: 400 clamp(1.6rem, 3.2vw, 2.4rem) / 1.15 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- palco 3D ---------- */
+
+.c3d__stage {
+  position: relative;
+  height: calc(var(--c3d-card-w) * 0.95);
+  perspective: var(--c3d-perspective);
+  perspective-origin: 50% 50%;
+  touch-action: pan-y;          /* permite rolar a página na vertical */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.c3d__stage.is-dragging { cursor: grabbing; }
+.c3d__stage:focus-visible {
+  outline: 2px solid var(--c3d-accent);
+  outline-offset: 6px;
+}
+
+.c3d__track {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+.c3d__card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--c3d-card-w);
+  aspect-ratio: 1 / 0.86;
+  overflow: hidden;                   /* vídeo grande nunca estica o card */
+  transform: translate(-50%, -50%);   /* o JS sobrescreve */
+  will-change: transform, opacity;
+}
+
+/* ---------- card em formato de janela ---------- */
+
+.c3d__win {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--c3d-card);
+  border: 1px solid var(--c3d-line);
+  border-radius: 3px;
+  box-shadow: 0 28px 40px -24px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.c3d__head {
+  display: flex;
+  align-items: center;
+  flex: 0 0 13%;
+  padding: 0 6%;
+}
+.c3d__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c3d-accent);
+}
+.c3d__ctl {
+  margin-left: auto;
+  width: 9px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.c3d__media {
+  position: relative;
+  flex: 1;
+  margin: 0 4% 4%;
+  overflow: hidden;
+  background: var(--bg, #222);
+  display: grid;
+  place-items: center;
+}
+.c3d .c3d__media :is(img, video, iframe) {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  object-fit: var(--c3d-fit, cover);   /* cover = preenche e corta; contain = mostra inteiro */
+  pointer-events: none;
+}
+.c3d__media figcaption {
+  position: relative;
+  padding: 0 8%;
+  text-align: center;
+  font: 600 clamp(0.85rem, 1.4vw, 1.15rem) / 1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- controles ---------- */
+
+.c3d__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: clamp(24px, 4vw, 56px);
+}
+
+.c3d__btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--c3d-text);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.c3d__btn:hover { background: rgba(255, 255, 255, 0.08); }
+.c3d__btn:focus-visible { outline: 2px solid var(--c3d-accent); outline-offset: 2px; }
+
+.c3d__bar {
+  position: relative;
+  width: clamp(90px, 12vw, 140px);
+  height: 2px;
+  background: var(--c3d-muted);
+}
+.c3d__thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22%;
+  height: 100%;
+  background: var(--c3d-accent);
+}
+
+/* ---------- demo da página (pode apagar) ---------- */
+
+body { margin: 0; background: #0b0b0b; font-family: system-ui, sans-serif; }
+
+@media (prefers-reduced-motion: reduce) {
+  .c3d__btn { transition: none; }
+}

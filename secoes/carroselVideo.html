@@ -1,0 +1,121 @@
+<!--
+    ============ COPIE DAQUI ATÉ O FIM DA </section> ============
+    Opções (todas opcionais) no atributo data- da <section>:
+      data-autoplay="false"   desliga a rotação automática
+      data-interval="2600"    tempo entre os slides (ms)
+      data-spacing="1.16"     distância entre cards (1 = encostados)
+      data-tilt="9"           inclinação por posição (graus)
+      data-depth="14"         quanto as bordas "avançam" para o espectador (px)
+      data-visible="3"        quantos cards aparecem de cada lado do centro
+  -->
+<section class="c3d" data-c3d aria-roledescription="carrossel" aria-label="Destaques">
+
+    <h2 class="c3d__title">Uma assinatura.<br>Todos os serviços.</h2>
+
+    <div class="c3d__stage" tabindex="0" aria-live="off">
+        <ul class="c3d__track">
+
+            <!--
+          Cada <li> é um card. Para usar imagem ou vídeo, troque o conteúdo de
+          .c3d__media por:  <img src="foto.jpg" alt="..." draggable="false">
+          ou:               <video src="video.mp4" autoplay muted loop playsinline></video>
+          Se quiser que o card seja um link, envolva o <figure> com <a href="...">.
+        -->
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+            <li class="c3d__card">
+                <div class="c3d__win">
+                    <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
+                    <figure class="c3d__media">
+                        <iframe
+                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
+                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                    </figure>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="c3d__controls">
+        <button class="c3d__btn" type="button" data-c3d-prev aria-label="Anterior">&larr;</button>
+        <div class="c3d__bar" aria-hidden="true"><span class="c3d__thumb"></span></div>
+        <button class="c3d__btn" type="button" data-c3d-next aria-label="Próximo">&rarr;</button>
+    </div>
+
+</section>

@@ -1,0 +1,72 @@
+/* =========================================
+   RESET E FUNDO DA PÁGINA
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #050a14;
+    /* Degradê radial exato da imagem de referência */
+    background-image: radial-gradient(circle at 50% 30%, #0a1630 0%, #02040a 80%, #000000 100%);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   rolagem.css
+   Usa as variáveis que o rolagem.js calcula a cada frame:
+   --visibilidade, --deslocamento (px), --escala, --giro (graus)
+   ========================================================= */
+
+/* ---------- efeito aplicado a cada elemento ---------- */
+.efeito {
+  opacity: var(--visibilidade, 1);
+  transform:
+    translate3d(0, calc(var(--deslocamento, 0) * 1px), 0)
+    rotate(calc(var(--giro, 0) * 1deg))
+    scale(var(--escala, 1));
+  /* não coloque "transition" em transform/opacity nesses elementos:
+     o JS já suaviza, e a transition faria o efeito "atrasar" */
+}
+
+/* usado pelo JS só durante a medição das posições */
+.medindo .efeito { transform: none !important; }
+
+/* ---------- rolagem com inércia ----------
+   O conteúdo vira uma camada fixa que o JS desliza;
+   a altura do <body> é ajustada pelo JS para existir barra de rolagem. */
+.rolagem-suave [data-rolagem] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+/* ---------- entrada da página ----------
+   As seções entram "do nada" no index vazio: começam invisíveis
+   e aparecem assim que tudo foi carregado e medido. */
+[data-rolagem] {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.pronto [data-rolagem] { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-rolagem] { opacity: 1; transition: none; }
+}
