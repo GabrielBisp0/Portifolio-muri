@@ -8,9 +8,9 @@
 }
 
 body {
-    background-color: #050a14;
+    background-color: #85adff;
     /* Degradê radial exato da imagem de referência */
-    background-image: radial-gradient(circle at 50% 30%, #0a1630 0%, #02040a 80%, #000000 100%);
+    background-image: radial-gradient(circle at 50% 30%, #0a1630 0%, #091a4e 80%, #cc4747 100%);
     color: white;
     font-family: 'Arial', sans-serif;
     min-height: 100vh;

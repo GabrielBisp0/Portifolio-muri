@@ -3,6 +3,7 @@
    para não conflitar com o CSS do seu site.
    ========================================================= */
 
+
 .c3d {
   --c3d-card: #0d0d0d;
   --c3d-line: rgba(255, 255, 255, 0.07);
@@ -35,11 +36,15 @@
 
 .c3d__title {
   margin: 0 auto clamp(28px, 5vw, 64px);
-  padding: 0 20px;
-  max-width: 24ch;
+  padding: 0px;
+  max-width: 26ch;
   text-align: center;
   font: 400 clamp(1.6rem, 3.2vw, 2.4rem) / 1.15 Georgia, "Times New Roman", serif;
   letter-spacing: -0.01em;
+}
+
+.c3d__title span {
+  color: var(--c3d-accent);
 }
 
 /* ---------- palco 3D ---------- */
