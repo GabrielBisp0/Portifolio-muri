@@ -3,14 +3,13 @@
    para não conflitar com o CSS do seu site.
    ========================================================= */
 
-
 .c3d {
   --c3d-card: #0d0d0d;
   --c3d-line: rgba(255, 255, 255, 0.07);
   --c3d-text: #f2efe9;
   --c3d-muted: rgba(255, 255, 255, 0.28);
   --c3d-accent: #f2441d;
-  --c3d-card-w: clamp(150px, 17vw, 250px);   /* largura de cada card */
+  --c3d-card-w: clamp(240px, 26vw, 400px);   /* largura de cada card (maior = vídeo mais visível) */
   --c3d-perspective: 1400px;                  /* menor = efeito 3D mais forte */
 
   position: relative;
@@ -36,6 +35,13 @@
 
 .c3d__title {
   margin: 0 auto clamp(28px, 5vw, 64px);
+  max-width: 26ch;
+  text-align: center;
+  font-family: var(--fonte, "Gotham Black", "Montserrat", system-ui);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   padding: 0px;
   max-width: 26ch;
   text-align: center;
@@ -44,14 +50,14 @@
 }
 
 .c3d__title span {
-  color: var(--c3d-accent);
+  color: red;
 }
 
 /* ---------- palco 3D ---------- */
 
 .c3d__stage {
   position: relative;
-  height: calc(var(--c3d-card-w) * 0.95);
+  height: calc(var(--c3d-card-w) * 0.9);
   perspective: var(--c3d-perspective);
   perspective-origin: 50% 50%;
   touch-action: pan-y;          /* permite rolar a página na vertical */
@@ -79,7 +85,7 @@
   left: 50%;
   top: 50%;
   width: var(--c3d-card-w);
-  aspect-ratio: 1 / 0.86;
+  aspect-ratio: 1 / 0.72;
   overflow: hidden;                   /* vídeo grande nunca estica o card */
   transform: translate(-50%, -50%);   /* o JS sobrescreve */
   will-change: transform, opacity;
@@ -140,12 +146,151 @@
   pointer-events: none;
 }
 .c3d__media figcaption {
-  position: relative;
-  padding: 0 8%;
-  text-align: center;
-  font: 600 clamp(0.85rem, 1.4vw, 1.15rem) / 1.2 system-ui, -apple-system, "Segoe UI", sans-serif;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 34px 12px 10px;
+  text-align: left;
+  font-family: var(--fonte, "Gotham Black", "Montserrat", system-ui, sans-serif);
+  font-weight: 900;
+  font-size: clamp(0.8rem, 1.2vw, 1.05rem);
+  line-height: 1.2;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  pointer-events: none;
 }
+
+/* ---------- cards com vídeo do YouTube ---------- */
+
+.c3d__card[data-youtube] { cursor: pointer; }
+.c3d__stage.is-dragging .c3d__card[data-youtube] { cursor: grabbing; }
+.c3d__card:focus-visible { outline: none; }
+.c3d__card:focus-visible .c3d__win { outline: 2px solid var(--c3d-accent); outline-offset: 3px; }
+
+/* botão de play em vidro, no centro da thumb */
+.c3d__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: clamp(44px, 18%, 68px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(10px) saturate(1.6);
+          backdrop-filter: blur(10px) saturate(1.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 10px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+  pointer-events: none;
+}
+.c3d__play::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 34%;
+  height: 38%;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transform: translateX(10%);
+}
+.c3d__card:hover .c3d__play,
+.c3d__card:focus-visible .c3d__play {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(242, 68, 29, 0.78);
+}
+
+/* ---------- popup do vídeo ----------
+   Fica fora do carrossel (o JS coloca direto no <body>). */
+
+/* com o popup aberto a página não rola (nem com o mouse sobre o player).
+   scrollbar-gutter mantém o espaço da barra para o layout não "pular" */
+html.c3d-travado {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.c3d-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.c3d-modal.is-aberto {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.c3d-modal__fundo {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 20, 0.74);
+  -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+}
+
+.c3d-modal__caixa {
+  position: relative;
+  width: min(1100px, 100%, calc((100vh - 112px) * 16 / 9));
+  width: min(1100px, 100%, calc((100dvh - 112px) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  margin-top: 48px;                     /* espaço para o botão fechar */
+  transform: translateY(14px) scale(0.95);
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.c3d-modal.is-aberto .c3d-modal__caixa { transform: none; }
+
+.c3d-modal__video {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #000;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 40px 90px -20px rgba(0, 0, 0, 0.85);
+}
+.c3d-modal__video iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.c3d-modal__fechar {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font: 400 26px / 1 system-ui, sans-serif;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.18);
+  transition: background-color 0.2s;
+}
+.c3d-modal__fechar:hover { background: rgba(242, 68, 29, 0.85); }
+.c3d-modal__fechar:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
 /* ---------- controles ---------- */
 
@@ -190,10 +335,9 @@
   background: var(--c3d-accent);
 }
 
-/* ---------- demo da página (pode apagar) ---------- */
-
-body { margin: 0; background: #0b0b0b; font-family: system-ui, sans-serif; }
-
 @media (prefers-reduced-motion: reduce) {
-  .c3d__btn { transition: none; }
+  .c3d__btn,
+  .c3d__play,
+  .c3d-modal,
+  .c3d-modal__caixa { transition: none; }
 }

@@ -1,0 +1,205 @@
+/* =========================================================
+   contato.css — seção #contato
+   Painel de vidro líquido + botões em vidro (Discord, X, Instagram).
+   Tudo está dentro de #contato, então não mexe no resto do site.
+   Usa a fonte e o fundo do global.css.
+   ========================================================= */
+
+#contato {
+  --ct-accent: #f2441d;
+  --ct-raio: 48px;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 48px) clamp(72px, 9vw, 120px);
+
+  /* linha de cima: etiqueta "Contato" + linha fina (::before e ::after) */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 14px;
+}
+
+/* ---------- etiqueta no topo (decorativa, feita só com CSS) ----------
+   Se não quiser, apague os dois blocos abaixo (::before e ::after). */
+#contato::before {
+  content: "Contato";
+  order: 0;
+  padding-left: 23px;
+  font: 900 0.8rem / 1 var(--fonte, "Gotham Black", "Montserrat", system-ui, sans-serif);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  /* bolinha vermelha com brilho */
+  background: radial-gradient(circle at 4.5px 50%,
+    var(--ct-accent) 0 4.5px, rgba(242, 68, 29, 0.35) 5px, transparent 11px) no-repeat;
+}
+#contato::after {
+  content: "";
+  order: 1;
+  flex: 1 1 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.28), transparent);
+}
+
+/* ---------- painel de vidro ---------- */
+#contato .contatoContainer {
+  order: 2;
+  flex: 0 0 100%;
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+  margin-top: clamp(28px, 4vw, 48px);
+  padding: clamp(28px, 5vw, 64px);
+  border-radius: var(--ct-raio);
+
+  /* vidro + luzes coloridas por dentro (laranja em cima, azul embaixo) */
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.10) 100%),
+    radial-gradient(ellipse 60% 95% at 0% 0%, rgba(242, 68, 29, 0.50), transparent 62%),
+    radial-gradient(ellipse 65% 100% at 100% 100%, rgba(50, 100, 255, 0.60), transparent 64%),
+    rgba(10, 20, 60, 0.45);
+  -webkit-backdrop-filter: blur(22px) saturate(1.9) brightness(1.1);
+          backdrop-filter: blur(22px) saturate(1.9) brightness(1.1);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.6),       /* brilho no topo */
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.26),
+    inset 0 -1.5px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 44px rgba(255, 255, 255, 0.07),
+    0 44px 80px -34px rgba(0, 0, 0, 0.85),          /* sombra no chão */
+    -34px 24px 100px -40px rgba(242, 68, 29, 0.40), /* halo laranja */
+    40px 56px 110px -40px rgba(50, 100, 255, 0.45), /* halo azul */
+    0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+
+/* aro de luz nas bordas */
+#contato .contatoContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 255, 255, 0.04) 68%,
+    rgba(255, 255, 255, 0.55) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+/* reflexo de luz no canto */
+#contato .contatoContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0) 24%);
+  pointer-events: none;
+}
+
+/* conteúdo fica acima dos reflexos */
+#contato .contatoContainer > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- título ---------- */
+#contato h2 {
+  margin: 0 0 clamp(24px, 4vw, 42px);
+  color: var(--texto, #f2efe9);
+  font: 900 clamp(1.9rem, 4.8vw, 3.3rem) / 1.05 var(--fonte, "Gotham Black", "Montserrat", system-ui, sans-serif);
+  letter-spacing: -0.025em;
+}
+
+/* ---------- botões ----------
+   O <div> que envolve Discord e X some do layout (display: contents),
+   assim os três links ficam lado a lado, todos iguais. */
+#contato .icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+#contato .icons > div { display: contents; }
+
+#contato .icons a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 14px 20px 14px 14px;
+  border-radius: 26px;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 14px 28px -16px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ícone dentro de um círculo de vidro */
+#contato .icons a img {
+  display: block;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#contato .icons a span {
+  min-width: 0;
+  font: 900 clamp(0.95rem, 1.6vw, 1.1rem) / 1.2 var(--fonte, "Gotham Black", "Montserrat", system-ui, sans-serif);
+  overflow-wrap: anywhere;
+}
+
+/* seta ↗ no canto */
+#contato .icons a::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  background: currentColor;
+  opacity: 0.65;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* passar o mouse: sobe, fica laranja e a seta acende */
+#contato .icons a:hover,
+#contato .icons a:focus-visible {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #f65a30, #cf3410);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 18px 36px -14px rgba(242, 68, 29, 0.7);
+}
+#contato .icons a:hover::after,
+#contato .icons a:focus-visible::after {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+#contato .icons a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* ---------- celular ---------- */
+@media (max-width: 760px) {
+  #contato { --ct-raio: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contato .icons a,
+  #contato .icons a::after { transition: none; }
+}

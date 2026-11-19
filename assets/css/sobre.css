@@ -1,0 +1,89 @@
+#sobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.sobreContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    max-width: 960px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sobreFoto {
+    flex-shrink: 0;
+}
+
+.sobreVidro {
+    position: relative;
+    display: inline-block;
+    padding: 4px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255, 59, 48, 0.9), rgba(255, 255, 255, 0.18), rgba(37, 99, 235, 0.9));
+    box-shadow:
+        0 22px 45px rgba(0, 0, 0, 0.45),
+        0 10px 24px rgba(0, 0, 0, 0.3),
+        -16px -14px 38px rgba(255, 59, 48, 0.32),
+        16px 14px 38px rgba(37, 99, 235, 0.32);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sobreVidro:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 28px 52px rgba(0, 0, 0, 0.55),
+        0 14px 28px rgba(0, 0, 0, 0.35),
+        -20px -18px 44px rgba(255, 59, 48, 0.42),
+        20px 18px 44px rgba(37, 99, 235, 0.42);
+}
+
+.sobreVidro img {
+    display: block;
+    width: 240px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 18px;
+    background: transparent;
+}
+
+.sobreTexto {
+    flex: 1;
+    max-width: 440px;
+}
+
+.sobreTexto p {
+    margin: 0;
+    line-height: 1.45;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .sobreContainer {
+        flex-direction: column;
+        gap: 28px;
+        text-align: center;
+    }
+
+    .sobreTexto p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .sobreContainer {
+        flex-direction: column;
+        gap: 28px;
+        text-align: center;
+    }
+
+    .sobreTexto p {
+        text-align: center;
+    }
+}

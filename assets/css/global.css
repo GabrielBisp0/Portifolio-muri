@@ -1,20 +1,82 @@
-/* =========================================
-   RESET E FUNDO DA PÁGINA
-   ========================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* =========================================================
+   global.css — estilos que valem para o site inteiro
+   Carregue ESTE arquivo primeiro, antes dos outros .css.
+   ========================================================= */
+
+/* ---------- FONTE reserva (Montserrat Black) ----------
+   Só é usada enquanto a Gotham Black não estiver no site.
+   Quando colocar o arquivo da Gotham em /fonts, pode apagar esta linha. */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+
+/* ---------- FONTE: Gotham Black ----------
+   A Gotham é paga (Hoefler&Co): use o seu arquivo com licença web.
+   Coloque em  fonts/Gotham-Black.woff2  (e/ou .woff), na mesma pasta
+   deste global.css. Se o arquivo ainda não existir, o navegador ignora
+   e cai na Montserrat Black. */
+@font-face {
+  font-family: "Gotham Black";
+  src: local("Gotham Black"), local("Gotham-Black"),
+       url("fonts/Gotham-Black.woff2") format("woff2"),
+       url("fonts/Gotham-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
+/* ---------- VARIÁVEIS (mexa aqui para ajustar o visual) ---------- */
+:root {
+  /* degradê do fundo: preto → azul, de cima para baixo na página inteira */
+  --fundo-1: #000000;   /* topo */
+  --fundo-2: #02081c;   /* meio, azul quase preto */
+  --fundo-3: #02081c;   /* final da página, azul profundo */
+
+  --texto: #f2efe9;
+
+  /* usada por todos os componentes; os outros CSS têm esta mesma lista como reserva */
+  --fonte: "Gotham Black", "Gotham", "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- FUNDO ----------
+   O degradê fica no <html>: acompanha a altura total da página e rola junto.
+   Para o degradê ficar PARADO enquanto a página rola, troque
+   "scroll" por "fixed" em background-attachment. */
+html {
+  min-height: 100%;
+  color-scheme: dark;                       /* barra de rolagem e campos de formulário escuros */
+  background-color: var(--fundo-1);         /* cor de segurança */
+  background-image: linear-gradient(
+    180deg,
+    var(--fundo-1) 0%,
+    var(--fundo-2) 40%,
+    var(--fundo-3) 100%
+  );
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+/* ---------- BASE ---------- */
 body {
-    background-color: #85adff;
-    /* Degradê radial exato da imagem de referência */
-    background-image: radial-gradient(circle at 50% 30%, #0a1630 0%, #091a4e 80%, #cc4747 100%);
-    color: white;
-    font-family: 'Arial', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+  margin: 0;
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* garante que o degradê do <html> apareça mesmo que algum CSS antigo
+     tenha deixado um "body { background: ... }" perdido por aí */
+  background: transparent !important;
+}
+
+/* botões e campos não herdam a fonte sozinhos: faz herdarem */
+button, input, select, textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(60, 120, 255, 0.55);
+  color: #fff;
 }
 
 
@@ -70,3 +132,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   [data-rolagem] { opacity: 1; transition: none; }
 }
+
+
+
+
+

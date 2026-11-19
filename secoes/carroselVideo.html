@@ -1,111 +1,92 @@
-<!--
-    ============ COPIE DAQUI ATÉ O FIM DA </section> ============
-    Opções (todas opcionais) no atributo data- da <section>:
-      data-autoplay="false"   desliga a rotação automática
-      data-interval="2600"    tempo entre os slides (ms)
-      data-spacing="1.16"     distância entre cards (1 = encostados)
-      data-tilt="9"           inclinação por posição (graus)
-      data-depth="14"         quanto as bordas "avançam" para o espectador (px)
-      data-visible="3"        quantos cards aparecem de cada lado do centro
-  -->
-<section class="c3d" data-c3d aria-roledescription="carrossel" aria-label="Destaques">
+<section class="c3d" data-c3d aria-roledescription="carrossel" aria-label="Vídeos">
 
     <h2 class="c3d__title">Um recorte do que eu crio quando o som encontra o <span>movimento</span>.</h2>
-
 
     <div class="c3d__stage" tabindex="0" aria-live="off">
         <ul class="c3d__track">
 
             <!--
-          Cada <li> é um card. Para usar imagem ou vídeo, troque o conteúdo de
-          .c3d__media por:  <img src="foto.jpg" alt="..." draggable="false">
-          ou:               <video src="video.mp4" autoplay muted loop playsinline></video>
-          Se quiser que o card seja um link, envolva o <figure> com <a href="...">.
+          COMO ADICIONAR UM VÍDEO:
+          copie um <li> inteiro, troque o link em data-youtube e o título em <figcaption>.
+          A thumbnail é buscada sozinha no YouTube, e o clique abre o vídeo num popup.
+
+          Links aceitos:  youtube.com/watch?v=ID  |  youtu.be/ID  |  youtube.com/shorts/ID
+                          youtube.com/embed/ID    |  só o ID (11 caracteres)
+          Para começar em um ponto do vídeo:  youtu.be/ID?t=90   (90 = segundos)
+
+          Quer uma thumbnail sua em vez da do YouTube? Coloque dentro do <figure>:
+              <img src="minha-capa.jpg" alt="">
         -->
-            <li class="c3d__card">
+
+            <li class="c3d__card" data-youtube="https://youtu.be/Bu8xhQPnuzM?t=3">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>
+                            Reedição I Terceiro Lua | Akaza...</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://youtu.be/9bZkp7q19f0">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Pedidos online</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://www.youtube.com/watch?v=kJQP7kiw5Fk">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Reservas</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Site institucional</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://www.youtube.com/watch?v=jNQXAC9IVRw">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Landing page</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://youtu.be/9bZkp7q19f0">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Delivery</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://www.youtube.com/watch?v=kJQP7kiw5Fk">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Fidelidade</figcaption>
                     </figure>
                 </div>
             </li>
 
-            <li class="c3d__card">
+            <li class="c3d__card" data-youtube="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <div class="c3d__win">
                     <div class="c3d__head"><i class="c3d__dot"></i><span class="c3d__ctl"></span></div>
                     <figure class="c3d__media">
-                        <iframe
-                            src="https://www.youtube.com/embed/ID_DO_VIDEO?autoplay=1&mute=1&loop=1&playlist=ID_DO_VIDEO&controls=0&playsinline=1"
-                            title="Nome do vídeo" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                        <figcaption>Painel de gestão</figcaption>
                     </figure>
                 </div>
             </li>
